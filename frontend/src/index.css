@@ -1,0 +1,14 @@
+.img-wrapper{
+    max-height: 300px;
+    min-height: 300px;
+    width: 100%;
+    background-size: cover;
+}
+
+.text-primary{
+    color: #f44a40 !important;
+}
+
+.bg-primary{
+    background: #f44a40 !important
+}

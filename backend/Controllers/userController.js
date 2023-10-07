@@ -73,6 +73,16 @@ const loginUser = asyncHandler(async(req, res) => {
 
 })
 
+// @desc Get User Data
+// @route /api/users
+// @access Public
+
+const getUser = asyncHandler(async(req, res) => {
+    const user = await User.findById(req.params.id)
+    
+    res.status(200).send(user)
+})
+
 // Generate Token
 
 const generateToken = (id) => {
@@ -82,4 +92,5 @@ const generateToken = (id) => {
 module.exports = {
     registerUser,
     loginUser,
+    getUser
 }
