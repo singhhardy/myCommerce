@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Profile({userData, setLoggedIn}) {
 
-  console.log(userData)  
+  // console.log(userData)  
 
   const navigate = useNavigate()
 

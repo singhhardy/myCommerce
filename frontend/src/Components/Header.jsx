@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 function Header({loggedIn}) { 
     
@@ -16,8 +16,8 @@ function Header({loggedIn}) {
                         <div className="main-menu d-none d-lg-block">
                             <nav>                                                
                                 <ul id="navigation">  
-                                    <li><a href="/">Home</a></li>
-                                    <li><a href="/store">Store</a></li>
+                                    <li><NavLink to="/">Home</NavLink></li>
+                                    <li><NavLink to="/store">Store</NavLink></li>
                                     {/* <li><a href="">about</a></li> */}
                                     {/* <li className="hot"><a href="#">Latest</a>
                                         <ul className="submenu">
@@ -40,7 +40,7 @@ function Header({loggedIn}) {
                                             <li><a href="">Product Checkout</a></li>
                                         </ul>
                                     </li> */}
-                                    <li><a href="">Contact</a></li>
+                                    <li><NavLink to="/contact">Contact</NavLink></li>
                                 </ul>
                             </nav>
                         </div>
@@ -51,8 +51,8 @@ function Header({loggedIn}) {
                                         <span className="flaticon-search"></span>
                                     </div>
                                 </li>
-                                <li><Link to={loggedIn ? '/profile' : '/login'}><span className="flaticon-user"></span></Link></li>
-                                <li><a href=""><span className="flaticon-shopping-cart"></span></a> </li>
+                                <li><NavLink to={loggedIn ? '/profile' : '/login'}><span className="flaticon-user"></span></NavLink></li>
+                                <li><NavLink href=""><span className="flaticon-shopping-cart"></span></NavLink> </li>
                             </ul>
                         </div>
                     </div>
