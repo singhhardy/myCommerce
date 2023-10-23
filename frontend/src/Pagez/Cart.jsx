@@ -5,7 +5,7 @@ import Spinner from '../Components/Spinner';
 function Cart({ userData }) {
   const [cartData, setCartData] = useState([]);
   const [products, setProducts] = useState([]);
-  const [productQuantity, setProductQuantity] = useState({});
+  const [cartFetched, setCartFetched] = useState(false)
   const [isLoading, setIsLoading] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -20,6 +20,7 @@ function Cart({ userData }) {
       .then(response => response.json())
       .then(data => {
         setCartData(data);
+        if(!data.length) setCartFetched(true)
       })
       .catch(error => console.log('Error:', error));
   }, []);
@@ -39,14 +40,15 @@ function Cart({ userData }) {
           const product = await response.json();
           productData.push(product);
         }
-
+        
         setProducts(productData);
         setIsLoading(false);
+        setCartFetched(true)
       };
 
       fetchProductData();
     } else {
-      setIsLoading(false);
+      if(cartFetched) setIsLoading(false);
     }
   }, [cartData]);
 
@@ -131,7 +133,7 @@ const updateCartQuantity = (updatedCart) => {
 
   return (
 <div className='container'>
-  {isLoading ? (
+  {(isLoading && !cartFetched) ? (
     <Spinner />
   ) : cartData.length > 0 ? (
     cartData.map((cartItem, index) => (
