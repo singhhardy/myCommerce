@@ -50,8 +50,6 @@ const createCartList = asyncHandler(async (req, res) => {
 // @route /api/cart
 // @access private
 
-
-
 const getCartList = asyncHandler(async(req,res) => {
     const user = await User.findById(req.user.id)
 
@@ -64,40 +62,71 @@ const getCartList = asyncHandler(async(req,res) => {
     }
 })
 
-const deletCartProduct = asyncHandler(async(req, res) => {
-    const { productId } = req.body;
-    const user = await User.findById(req.user.id);
+// Remove Product from Cart
+// @desc Delete product from cart
+// @route DELETE /api/cart
+// @access private
 
-    if (user.cart && user.cart.products) {
-        user.cart.products = user.cart.products.filter(product => product.product._id !== productId);
-        await user.save();
-        res.status(200).json({ message: "Product removed from the cart successfully.", updatedCart: user.cart });
-    } else {
-        res.status(404).json({ error: "Cart or product not found." });
+// Import necessary dependencies, models, and asyncHandler if not already done
+
+const deleteCartProduct = asyncHandler(async (req, res) => {
+    const { userId, productId } = req.body;
+
+    try {
+        const cart = await Cart.findOne({ userId });
+
+        if (!cart) {
+            return res.status(404).json({ message: "Cart not found" });
+        }
+
+        // Assuming that Cart model has an array called "products" with subdocuments
+        const productIndex = cart.products.findIndex((product) => product.product.toString() === productId);
+
+        if (productIndex === -1) {
+            return res.status(400).json({ message: 'Product Not found' });
+        }
+
+        // Remove the product from the products array
+        cart.products.splice(productIndex, 1);
+
+        await cart.save(); // Save the cart after removing the product
+
+        res.status(200).json({ success: true });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
-})
-
+});
 
 // @desc Update Quantity of products in Cart
 // @route /api/cart
 // @access private
 
-const updateProductQuantity = asyncHandler(async(req, res) => {
-    const {quantity} = req.body
+const updateProductQuantity = asyncHandler(async (req, res) => {
+    const { userId, updatedCart } = req.body;
 
-    const user = await User.findById(req.user.id)
-
-    const product = await products.findById(productId)
-
-    const updatedProduct = await products.findByIdAndUpdate(quantity)
-
-    res.status(201).send(updatedProduct)
-    
-})
-
+    try {
+      const cart = await Cart.findOne({ userId });
+  
+      if (!cart) {
+        return res.status(404).json({ message: "Cart not found" });
+      }
+  
+      // Update the cart's products with the updatedCart
+      cart.products = updatedCart;
+  
+      await cart.save();
+      return res.status(200).json({ message: "Product quantities updated" });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+  
 module.exports = {
     createCartList,
     getCartList,
-    deletCartProduct,
+    deleteCartProduct,
     updateProductQuantity
 }
