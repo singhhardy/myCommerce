@@ -37,7 +37,7 @@ function App() {
             <Route path='/Cart' element={<Cart userData={userData} />} />
             <Route path='/Login' element={<Login setLoggedIn={setLoggedIn} />} />
             <Route path='/Profile' element={<Profile setLoggedIn={setLoggedIn} userData={userData} />} />
-            <Route path='/Product/:id' element={<ProductPage userData={userData} />} />
+            <Route path='/Product/:id' element={<ProductPage userData={userData} loggedIn={loggedIn} />} />
           </Routes>
         </div>
         <Footer />

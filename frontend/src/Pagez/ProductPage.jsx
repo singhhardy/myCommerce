@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../Components/Spinner'
 
-function ProductPage({userData}) {
+function ProductPage({userData, loggedIn}) {
     const params = useParams()
     const navigate = useNavigate()
     const [product, setProduct] = useState([])
@@ -31,19 +31,23 @@ function ProductPage({userData}) {
             quantity: 1
         }
 
-        fetch('/api/cart', {
-            method: 'POST', 
-            headers: {
-                'Authorization': `Bearer ${userData.token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(cartData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            navigate('/Cart')
-        })
-        .catch(error => console.log('Error:', error));
+        if(loggedIn === true){
+            fetch('/api/cart', {
+                method: 'POST', 
+                headers: {
+                    'Authorization': `Bearer ${userData.token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cartData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                navigate('/Cart')
+            })
+            .catch(error => console.log('Error:', error));    
+        } else{
+            navigate('/login')
+        }
     }
 
 return (
