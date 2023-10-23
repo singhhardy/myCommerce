@@ -12,3 +12,8 @@
 .bg-primary{
     background: #f44a40 !important
 }
+
+.cart-icon{
+    cursor: pointer;
+    color: #f44a40;
+}

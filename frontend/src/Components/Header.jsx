@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function Header({loggedIn}) { 
     
@@ -52,7 +51,7 @@ function Header({loggedIn}) {
                                     </div>
                                 </li>
                                 <li><NavLink to={loggedIn ? '/profile' : '/login'}><span className="flaticon-user"></span></NavLink></li>
-                                <li><NavLink href=""><span className="flaticon-shopping-cart"></span></NavLink> </li>
+                                <li><NavLink to='/Cart'><span className="flaticon-shopping-cart"></span></NavLink> </li>
                             </ul>
                         </div>
                     </div>

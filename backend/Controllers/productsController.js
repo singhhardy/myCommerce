@@ -8,18 +8,21 @@ const mongoose = require('mongoose')
 // @access Private
 
 const createProduct = asyncHandler(async(req, res) => {
-    const {title, description, imageUrl, stock, category, price} = req.body
+    const {title, description, imageUrl, quantity, category, price} = req.body
 
-    if(!title || !description || !imageUrl || !category || !price || !stock){
+
+    if(!title || !description || !imageUrl || !category || !price ){
         res.status(400)
         throw new Error('Please enter all fields')
     }
+
+    const defaultQuantity = 1;
 
     const product = await products.create({
         title,
         description,
         category,
-        stock,
+        quantity,
         price,
         imageUrl
     })

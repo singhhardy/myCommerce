@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Login() {
+function Login({setLoggedIn}) {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -30,8 +30,9 @@ function Login() {
     })
     .then(response => response.json())
     .then(data => {
-        navigate('/')
         localStorage.setItem('user', JSON.stringify(data))
+        setLoggedIn(true)
+        navigate('/')
     })
     .catch(error => {
         console.log(`Error: ${error}`);

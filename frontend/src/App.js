@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Footer from './Components/Footer';
 import Profile from './Pagez/Profile';
 import ProductPage from './Pagez/ProductPage';
+import Cart from './Pagez/Cart';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -21,10 +22,6 @@ function App() {
       setUserData(JSON.parse(getUserData))
       setLoggedIn(true)
     }
-    else{
-      setUserData({})
-      setLoggedIn(false)
-    }
 
   }, [localStorage.getItem('user')])
 
@@ -35,11 +32,12 @@ function App() {
         <div className='app'>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/store' element={<Store />} /> 
+            <Route path='/store' element={<Store />} />
             <Route path='/Register' element={<Register />} />
-            <Route path='/Login' element={<Login />} />
+            <Route path='/Cart' element={<Cart userData={userData} />} />
+            <Route path='/Login' element={<Login setLoggedIn={setLoggedIn} />} />
             <Route path='/Profile' element={<Profile setLoggedIn={setLoggedIn} userData={userData} />} />
-            <Route path='/Product/:id' element={<ProductPage />} />
+            <Route path='/Product/:id' element={<ProductPage userData={userData} loggedIn={loggedIn} />} />
           </Routes>
         </div>
         <Footer />

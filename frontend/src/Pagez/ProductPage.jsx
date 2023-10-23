@@ -1,19 +1,16 @@
 import React, { useState,useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../Components/Spinner'
 
-function ProductPage() {
+function ProductPage({userData, loggedIn}) {
     const params = useParams()
-
-    console.log(params.id)
-
+    const navigate = useNavigate()
     const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(true)
     
-    const productsUrl = `/api/products/${params.id}`;      
+    const productsUrl = `/api/products/${params.id}`;
 
-    console.log(product.imageUrl)
-
+    // GET PRODUCTS
     useEffect(() => {
         fetch(productsUrl)
           .then(response => response.json())
@@ -24,8 +21,36 @@ function ProductPage() {
           .catch(error => console.error('Error:', error));
       }, []);
 
+    //   ADD TO CART
 
-  return (
+    const handleCart = () => {
+        
+        const cartData = {
+            userId: userData._id,
+            productId: product._id,
+            quantity: 1
+        }
+
+        if(loggedIn === true){
+            fetch('/api/cart', {
+                method: 'POST', 
+                headers: {
+                    'Authorization': `Bearer ${userData.token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cartData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                navigate('/Cart')
+            })
+            .catch(error => console.log('Error:', error));    
+        } else{
+            navigate('/login')
+        }
+    }
+
+return (
     <>
         {loading ? (<Spinner />) : (
             <div class="container py-5 my-5">
@@ -37,7 +62,7 @@ function ProductPage() {
                         <h1>{product.title}</h1>
                         <p>{product.description}</p>
                         <h3 className='text-primary'>Rs {product.price} /-</h3>
-                        <button className='btn'>Add to Cart</button>
+                        <button className='btn' onClick={handleCart}>Add to Cart</button>
                     </div>
                 </div>
             </div>
