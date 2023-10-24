@@ -6,7 +6,7 @@ function Products() {
 
     const [products, setProducts] = useState([])
     
-    const productsUrl = '/api/products';      
+    const productsUrl = 'https://mycommerce-6j7g.onrender.com//api/products';      
 
     useEffect(() => {
         fetch(productsUrl)

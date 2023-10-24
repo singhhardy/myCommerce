@@ -8,7 +8,7 @@ function ProductPage({userData, loggedIn}) {
     const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(true)
     
-    const productsUrl = `/api/products/${params.id}`;
+    const productsUrl = `https://mycommerce-6j7g.onrender.com//api/products/${params.id}`;
 
     // GET PRODUCTS
     useEffect(() => {
@@ -32,7 +32,7 @@ function ProductPage({userData, loggedIn}) {
         }
 
         if(loggedIn === true){
-            fetch('/api/cart', {
+            fetch('https://mycommerce-6j7g.onrender.com//api/cart', {
                 method: 'POST', 
                 headers: {
                     'Authorization': `Bearer ${userData.token}`,

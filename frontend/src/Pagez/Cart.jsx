@@ -10,7 +10,7 @@ function Cart({ userData }) {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    fetch('/api/cart', {
+    fetch('https://mycommerce-6j7g.onrender.com//api/cart', {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${userData.token}`,
@@ -31,7 +31,7 @@ function Cart({ userData }) {
         const productData = [];
 
         for (const cartItem of cartData) {
-          const response = await fetch(`/api/products/${cartItem.product}`, {
+          const response = await fetch(`https://mycommerce-6j7g.onrender.com//api/products/${cartItem.product}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ function Cart({ userData }) {
   };
       
 const updateCartQuantity = (updatedCart) => {
-    fetch('/api/cart', {
+    fetch('https://mycommerce-6j7g.onrender.com//api/cart', {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${userData.token}`,
@@ -113,7 +113,7 @@ const updateCartQuantity = (updatedCart) => {
   // Remove item from cart
   const removeFromCart = (productId) => {
     // Make a DELETE request to remove the item from the cart
-    fetch('/api/cart', {
+    fetch('https://mycommerce-6j7g.onrender.com//api/cart', {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${userData.token}`,

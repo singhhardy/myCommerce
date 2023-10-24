@@ -23,7 +23,7 @@ function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch('/api/users/register', {
+        fetch('https://mycommerce-6j7g.onrender.com//api/users/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

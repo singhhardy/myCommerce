@@ -19,6 +19,7 @@ app.use('/api/products', require('./Routes/productsRoutes'))
 app.use('/api/cart', require('./Routes/cartRoutes'))
 
 app.get('/', (req, res) => {
+    res.setHeader("Access-Control-Allow-Credentials", "true")
     res.status(200).json({message: 'Welcome to MyCommerce'})
 })
 
