@@ -21,7 +21,7 @@ function Login({setLoggedIn}) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('https://mycommerce-6j7g.onrender.com//api/users/login', {
+    fetch('https://mycommerce-6j7g.onrender.com/api/users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
