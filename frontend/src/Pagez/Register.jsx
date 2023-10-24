@@ -33,7 +33,7 @@ function Register() {
         .then(response => response.json())
         .then(data => {
           toast('Successfull')
-          navigate('/')
+          navigate('/login')
         })
         .catch(error => {
           console.log(error)
