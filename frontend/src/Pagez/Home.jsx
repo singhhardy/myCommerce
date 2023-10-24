@@ -37,7 +37,7 @@ function Home() {
 
         <div className='container my-5 py-5'>
         <h1 className='text-center my-5 py-5 text-light'><span className='bg-primary p-2 rounded'>Our Products</span></h1>
-        <div className='row'>
+        <div className='row g-5'>
         <Products />
         </div>
         </div>

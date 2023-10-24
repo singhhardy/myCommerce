@@ -22,8 +22,8 @@ function Products() {
 
     {products.slice(0, 6)
     .map((product) => (
-        <div className='col-md-4' key={product.key}>
-        <div className="card shadow-lg">
+        <div className='col-lg-4' key={product.key}>
+        <div className="card m-2 shadow-lg">
             <Link to={`/Product/${product._id}`}>
             <img className="img-fluid card-img-top" src={product.imageUrl} alt={product.title} />
             </Link>
